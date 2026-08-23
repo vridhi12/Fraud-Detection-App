@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load your trained model
-model = joblib.load('/content/drive/MyDrive/Fraud_Detection_Project/fraud_model.pkl')
+model = joblib.load('fraud_model.pkl')
 
 st.set_page_config(page_title="Fraud Detection System", page_icon="🕵️‍♂️", layout="wide")
 st.title("💳 Real-Time Credit Card Fraud Detection")
