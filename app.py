@@ -43,7 +43,7 @@ def friendly(name):
 st.title("💳 Real-Time Credit Card Fraud Detection")
 st.caption("Vridhi Gautam | Pratinik Infotech Machine Learning Internship | XGBoost + Streamlit")
 
-tab_live, tab_perf = st.tabs(["🔍 Check a transaction", "📊 Model performance"])
+tab_live, tab_data, tab_perf = st.tabs(["🔍 Check a transaction", "📁 Dataset", "📊 Model performance"])
 
 # ---------------------------------------------------------------- live check
 with tab_live:
@@ -93,6 +93,59 @@ with tab_live:
             "Red bars push the score toward fraud, green bars toward legitimate. V1 to V28 are anonymised "
             "(PCA-transformed) columns in the public dataset, so their real-world meaning is hidden by design."
         )
+
+
+# -------------------------------------------------------------------- dataset
+with tab_data:
+    d = metrics["dataset"]
+    legit = d["rows"] - d["frauds"]
+    train_frauds = d["frauds"] - d["test_frauds"]
+
+    st.subheader("About the dataset")
+    st.write(
+        "The model was trained and tested on the **Credit Card Fraud Detection** dataset published by the "
+        "Machine Learning Group of ULB (Université Libre de Bruxelles) on Kaggle: "
+        "[kaggle.com/datasets/mlg-ulb/creditcardfraud](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud). "
+        "It contains real credit card transactions made by European cardholders over two days."
+    )
+
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Total transactions", f"{d['rows']:,}")
+    c2.metric("Fraudulent", f"{d['frauds']:,}")
+    c3.metric("Fraud share", f"{d['fraud_pct']:.3f}%")
+    c4.metric("Features", "30")
+
+    col_chart, col_text = st.columns([1, 1])
+    with col_chart:
+        fig, ax = plt.subplots(figsize=(5, 3.2))
+        bars = ax.bar(["Legitimate", "Fraud"], [legit, d["frauds"]], color=["#2563eb", "#dc2626"])
+        ax.set_yscale("log")
+        ax.set_ylabel("Number of transactions (log scale)")
+        ax.set_title("Class imbalance")
+        for b, v in zip(bars, [legit, d["frauds"]]):
+            ax.text(b.get_x() + b.get_width() / 2, v, f"{v:,}", ha="center", va="bottom", fontsize=9)
+        fig.tight_layout()
+        st.pyplot(fig)
+    with col_text:
+        st.markdown(
+            "**Columns**\n"
+            "- `Time`: seconds since the first transaction\n"
+            "- `V1` to `V28`: anonymised features (PCA-transformed to protect cardholder privacy)\n"
+            "- `Amount`: transaction amount\n"
+            "- `Class`: 1 = fraud, 0 = legitimate\n\n"
+            "**Train / test split (80 / 20, stratified)**\n"
+            f"- Training: {d['train_rows']:,} transactions ({train_frauds} frauds)\n"
+            f"- Testing: {d['test_rows']:,} transactions ({d['test_frauds']} frauds)"
+        )
+
+    st.markdown("**Preview: 10 real transactions from the test set** (the ones used in the demo tab)")
+    preview_cols = ["Time", "V1", "V2", "V3", "V4", "V5", "Amount", "Class"]
+    st.dataframe(samples[preview_cols], hide_index=True)
+
+    st.info(
+        "Only these 10 sample rows are bundled with the app, because the full file (about 150 MB) is too "
+        "large to host in this repository. The model itself was trained on the complete dataset."
+    )
 
 # ------------------------------------------------------------ model performance
 with tab_perf:
