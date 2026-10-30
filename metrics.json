@@ -1,0 +1,42 @@
+{
+  "dataset": {
+    "rows": 284807,
+    "frauds": 492,
+    "fraud_pct": 0.1727485630620034,
+    "train_rows": 227845,
+    "test_rows": 56962,
+    "test_frauds": 98
+  },
+  "model": {
+    "name": "XGBoost",
+    "n_estimators": 150,
+    "max_depth": 4,
+    "learning_rate": 0.1,
+    "scale_pos_weight": 100,
+    "random_state": 42,
+    "eval_metric": "logloss"
+  },
+  "threshold": 0.7475241422653198,
+  "tuned": {
+    "threshold": 0.7475241422653198,
+    "precision": 0.8181818181818182,
+    "recall": 0.826530612244898,
+    "f1": 0.8223350253807107,
+    "tp": 81,
+    "fp": 18,
+    "fn": 17,
+    "tn": 56846
+  },
+  "default": {
+    "threshold": 0.5,
+    "precision": 0.6942148760330579,
+    "recall": 0.8571428571428571,
+    "f1": 0.7671232876712328,
+    "tp": 84,
+    "fp": 37,
+    "fn": 14,
+    "tn": 56827
+  },
+  "pr_auc": 0.8608320343555846,
+  "roc_auc": 0.983107923811055
+}
