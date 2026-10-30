@@ -1,42 +1,150 @@
 {
   "dataset": {
-    "rows": 284807,
-    "frauds": 492,
-    "fraud_pct": 0.1727485630620034,
-    "train_rows": 227845,
-    "test_rows": 56962,
-    "test_frauds": 98
+    "name": "Credit Card Transactions Fraud Detection Dataset (Kaggle, simulated)",
+    "train_rows": 1296675,
+    "train_frauds": 7506,
+    "train_period": [
+      "2019-01-01 00:00:18",
+      "2020-06-21 12:13:37"
+    ],
+    "test_rows": 555719,
+    "test_frauds": 2145,
+    "test_period": [
+      "2020-06-21 12:14:25",
+      "2020-12-31 23:59:34"
+    ],
+    "fit_rows": 1024843,
+    "val_rows": 271832,
+    "val_frauds": 1607,
+    "n_features": 34
   },
   "model": {
-    "name": "XGBoost",
-    "n_estimators": 150,
-    "max_depth": 4,
+    "name": "Gradient Boosted Trees (sklearn HistGradientBoostingClassifier)",
+    "max_iter": 400,
     "learning_rate": 0.1,
-    "scale_pos_weight": 100,
-    "random_state": 42,
-    "eval_metric": "logloss"
+    "max_depth": 8,
+    "max_leaf_nodes": 63,
+    "l2_regularization": 1.0,
+    "random_state": 42
   },
-  "threshold": 0.7475241422653198,
-  "tuned": {
-    "threshold": 0.7475241422653198,
-    "precision": 0.8181818181818182,
-    "recall": 0.826530612244898,
-    "f1": 0.8223350253807107,
-    "tp": 81,
-    "fp": 18,
-    "fn": 17,
-    "tn": 56846
+  "threshold": 0.09241059191759411,
+  "validation": {
+    "precision": 0.9390926041019266,
+    "recall": 0.940261356565028
   },
-  "default": {
-    "threshold": 0.5,
-    "precision": 0.6942148760330579,
-    "recall": 0.8571428571428571,
-    "f1": 0.7671232876712328,
-    "tp": 84,
-    "fp": 37,
-    "fn": 14,
-    "tn": 56827
+  "test": {
+    "precision": 0.917608286252354,
+    "recall": 0.9086247086247087,
+    "f1": 0.9130944014991801,
+    "tp": 1949,
+    "fp": 175,
+    "fn": 196,
+    "tn": 553399
   },
-  "pr_auc": 0.8608320343555846,
-  "roc_auc": 0.983107923811055
+  "pr_auc": 0.9618137153735659,
+  "roc_auc": 0.9991248014186231,
+  "money": {
+    "fraud_value_total": 1133324.6800000002,
+    "fraud_value_caught": 1076104.0299999998,
+    "fraud_value_missed": 57220.649999999994,
+    "legit_value_wrongly_flagged": 82055.28999999998,
+    "pct_fraud_value_caught": 94.95108056766219
+  },
+  "monthly": [
+    {
+      "month": "2020-06",
+      "n": 30058,
+      "frauds": 133,
+      "precision": 0.924812030075188,
+      "recall": 0.924812030075188
+    },
+    {
+      "month": "2020-07",
+      "n": 85848,
+      "frauds": 321,
+      "precision": 0.9225806451612903,
+      "recall": 0.8909657320872274
+    },
+    {
+      "month": "2020-08",
+      "n": 88759,
+      "frauds": 415,
+      "precision": 0.9356435643564357,
+      "recall": 0.9108433734939759
+    },
+    {
+      "month": "2020-09",
+      "n": 69533,
+      "frauds": 340,
+      "precision": 0.9281437125748503,
+      "recall": 0.9117647058823529
+    },
+    {
+      "month": "2020-10",
+      "n": 69348,
+      "frauds": 384,
+      "precision": 0.9480874316939891,
+      "recall": 0.9036458333333334
+    },
+    {
+      "month": "2020-11",
+      "n": 72635,
+      "frauds": 294,
+      "precision": 0.902027027027027,
+      "recall": 0.9081632653061225
+    },
+    {
+      "month": "2020-12",
+      "n": 139538,
+      "frauds": 258,
+      "precision": 0.8469750889679716,
+      "recall": 0.9224806201550387
+    }
+  ],
+  "latency": {
+    "median_ms": 3.3062124999787557,
+    "p95_ms": 4.423460600048657
+  },
+  "top_features": [
+    [
+      "amt",
+      0.88088266440684
+    ],
+    [
+      "amt_today_before",
+      0.33244828578065383
+    ],
+    [
+      "cat_grocery_pos",
+      0.31970933470743523
+    ],
+    [
+      "cat_gas_transport",
+      0.2890915421710185
+    ],
+    [
+      "n_today_before",
+      0.07108630835612728
+    ],
+    [
+      "age",
+      0.06465456737890601
+    ],
+    [
+      "night",
+      0.05541240926505453
+    ],
+    [
+      "secs_since_prev",
+      0.05391837526689641
+    ],
+    [
+      "hour",
+      0.05247940417390179
+    ],
+    [
+      "cat_grocery_net",
+      0.022540106678018312
+    ]
+  ]
 }

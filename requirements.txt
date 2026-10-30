@@ -1,6 +1,6 @@
 streamlit
-joblib
 pandas
+numpy
 matplotlib
-scikit-learn
-xgboost
+joblib
+scikit-learn==1.8.0
